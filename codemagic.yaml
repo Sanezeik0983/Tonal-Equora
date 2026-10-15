@@ -1,0 +1,35 @@
+workflows:
+  ios-workflow:
+    name: iOS Workflow
+    max_build_duration: 120
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: Tonal
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.tonaleq.eqourato
+      vars:
+        BUNDLE_ID: com.tonaleq.eqourato
+        NSE_BUNDLE_ID: com.tonaleq.eqourato
+        XCODE_PROJECT: "Clyra.xcodeproj"
+        XCODE_SCHEME: "Clyra"
+        APP_STORE_APPLE_ID: 6822713247
+      xcode: latest
+    scripts:
+      - name: Set up provisioning profiles settings on Xcode project
+        script: xcode-project use-profiles
+      - name: Build ipa for distribution
+        script: |
+          xcode-project build-ipa \
+            --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
+            --scheme "$XCODE_SCHEME"
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+    
+    publishing:
+      app_store_connect:
+        auth: integration

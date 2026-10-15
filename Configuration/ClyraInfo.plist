@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Tonal Equora</string>
+	<key>CFBundleDisplayName</key>
+	<string>Tonal Equora</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access is used to add a photo of your listening room to its local setup profile.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Microphone access is used for relative room noise measurements and Music Assist listening comparisons. Audio is processed on device.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo Library access is used to choose a photo of your listening room for its local setup profile.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Silkscreen-Regular.ttf</string>
+		<string>Silkscreen-Bold.ttf</string>
+		<string>DepartureMono-Regular.otf</string>
+		<string>Doto_Rounded-Bold.ttf</string>
+		<string>Doto_Rounded-Medium.ttf</string>
+		<string>Doto_Rounded-Regular.ttf</string>
+		<string>Doto_Rounded-SemiBold.ttf</string>
+		<string>Satoshi-Black.otf</string>
+		<string>Satoshi-Bold.otf</string>
+		<string>Satoshi-Light.otf</string>
+		<string>Satoshi-Medium.otf</string>
+		<string>Satoshi-Regular.otf</string>
+	</array>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<key>UILaunchScreen</key>
+	<dict/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+</dict>
+</plist>
