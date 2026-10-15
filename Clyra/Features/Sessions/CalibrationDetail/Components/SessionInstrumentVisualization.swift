@@ -270,13 +270,13 @@ struct SessionInstrumentVisualization: View {
     }
 
     private func noise(size: CGSize, time: TimeInterval) -> some View {
-        let average = abs(
+        let average: Double = abs(
             record.payload.noise?
                 .averageDBFS
                 ?? -42
         )
 
-        let activity = min(
+        let activity: Double = min(
             max(
                 1 - average / 80,
                 0.18
@@ -286,47 +286,7 @@ struct SessionInstrumentVisualization: View {
 
         return ZStack {
             ForEach(0..<4, id: \.self) { index in
-                let phase =
-                    (
-                        time * (0.34 + activity * 0.08)
-                        + Double(index) * 0.25
-                    )
-                    .truncatingRemainder(
-                        dividingBy: 1
-                    )
-
-                let visibility =
-                    sin(
-                        Double.pi * phase
-                    )
-
-                Circle()
-                    .stroke(
-                        RoomSoftPalette.orange
-                            .opacity(
-                                max(
-                                    0,
-                                    visibility *
-                                    (
-                                        index == 0
-                                            ? 0.24
-                                            : 0.16
-                                    )
-                                )
-                            ),
-                        lineWidth:
-                            index == 0
-                                ? 1.6
-                                : 1
-                    )
-                    .frame(
-                        width:
-                            160
-                            + CGFloat(phase) * 184,
-                        height:
-                            160
-                            + CGFloat(phase) * 184
-                    )
+                SessionNoiseRing(index: index, time: time, activity: activity)
             }
 
             baseListener(
@@ -434,5 +394,27 @@ struct SessionInstrumentVisualization: View {
             }
             .offset(y: 144)
         }
+    }
+}
+
+private struct SessionNoiseRing: View {
+    let index: Int
+    let time: TimeInterval
+    let activity: Double
+
+    var body: some View {
+        let speed: Double = 0.34 + activity * 0.08
+        let offset: Double = Double(index) * 0.25
+        let phase: Double = (time * speed + offset).truncatingRemainder(dividingBy: 1)
+        let visibility: Double = sin(Double.pi * phase)
+        let peakOpacity: Double = index == 0 ? 0.24 : 0.16
+        let opacity: Double = max(0, visibility * peakOpacity)
+        let lineWidth: CGFloat = index == 0 ? 1.6 : 1
+        let diameter: CGFloat = 160 + CGFloat(phase) * 184
+        let color: Color = RoomSoftPalette.orange.opacity(opacity)
+
+        return Circle()
+            .stroke(color, lineWidth: lineWidth)
+            .frame(width: diameter, height: diameter)
     }
 }
